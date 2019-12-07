@@ -99,9 +99,13 @@
 		DFBA825B239B81D20026E311 /* TABAssignment */ = {
 			isa = PBXGroup;
 			children = (
+				DFBA8290239B82A60026E311 /* Services */,
+				DFBA828F239B829A0026E311 /* Utils */,
+				DFBA828C239B82870026E311 /* Models */,
+				DFBA828D239B828E0026E311 /* View Models */,
+				DFBA828E239B82940026E311 /* View Controllers */,
 				DFBA825C239B81D20026E311 /* AppDelegate.swift */,
 				DFBA825E239B81D20026E311 /* SceneDelegate.swift */,
-				DFBA8260239B81D20026E311 /* ViewController.swift */,
 				DFBA8262239B81D20026E311 /* Main.storyboard */,
 				DFBA8265239B81D60026E311 /* Assets.xcassets */,
 				DFBA8267239B81D60026E311 /* LaunchScreen.storyboard */,
@@ -126,6 +130,42 @@
 				DFBA8280239B81D60026E311 /* Info.plist */,
 			);
 			path = TABAssignmentUITests;
+			sourceTree = "<group>";
+		};
+		DFBA828C239B82870026E311 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		DFBA828D239B828E0026E311 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		DFBA828E239B82940026E311 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				DFBA8260239B81D20026E311 /* ViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		DFBA828F239B829A0026E311 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		DFBA8290239B82A60026E311 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
