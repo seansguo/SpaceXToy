@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LaunchListViewController.swift
 //  TABAssignment
 //
 //  Created by Sean Guo on 7/12/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class LaunchListViewController: UITableViewController {
     
     let dataStore = RemoteDataStore()
 
