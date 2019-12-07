@@ -23,6 +23,9 @@
 		DFBA829C239B8C040026E311 /* WebServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA829B239B8C040026E311 /* WebServiceProtocol.swift */; };
 		DFBA829E239B8C2D0026E311 /* SpaceXService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA829D239B8C2D0026E311 /* SpaceXService.swift */; };
 		DFBA82A0239BB27B0026E311 /* LaunchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA829F239BB27A0026E311 /* LaunchListViewModel.swift */; };
+		DFBA82A2239BC7360026E311 /* LocalDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA82A1239BC7350026E311 /* LocalDataStore.swift */; };
+		DFBA82A4239BC8C20026E311 /* LocalServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA82A3239BC8C20026E311 /* LocalServiceProtocol.swift */; };
+		DFBA82A6239BC9490026E311 /* InMemoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA82A5239BC9490026E311 /* InMemoryService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		DFBA829B239B8C040026E311 /* WebServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceProtocol.swift; sourceTree = "<group>"; };
 		DFBA829D239B8C2D0026E311 /* SpaceXService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXService.swift; sourceTree = "<group>"; };
 		DFBA829F239BB27A0026E311 /* LaunchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewModel.swift; sourceTree = "<group>"; };
+		DFBA82A1239BC7350026E311 /* LocalDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataStore.swift; sourceTree = "<group>"; };
+		DFBA82A3239BC8C20026E311 /* LocalServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalServiceProtocol.swift; sourceTree = "<group>"; };
+		DFBA82A5239BC9490026E311 /* InMemoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,8 +192,11 @@
 			children = (
 				DFBA8297239B8B970026E311 /* DataStoreProtocol.swift */,
 				DFBA8299239B8BC50026E311 /* RemoteDataStore.swift */,
+				DFBA82A1239BC7350026E311 /* LocalDataStore.swift */,
 				DFBA829B239B8C040026E311 /* WebServiceProtocol.swift */,
 				DFBA829D239B8C2D0026E311 /* SpaceXService.swift */,
+				DFBA82A3239BC8C20026E311 /* LocalServiceProtocol.swift */,
+				DFBA82A5239BC9490026E311 /* InMemoryService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -327,11 +336,14 @@
 				DFBA82A0239BB27B0026E311 /* LaunchListViewModel.swift in Sources */,
 				DFBA8296239B8ADE0026E311 /* URL+Extensions.swift in Sources */,
 				DFBA825D239B81D20026E311 /* AppDelegate.swift in Sources */,
+				DFBA82A4239BC8C20026E311 /* LocalServiceProtocol.swift in Sources */,
 				DFBA829A239B8BC50026E311 /* RemoteDataStore.swift in Sources */,
 				DFBA8292239B83880026E311 /* Launch.swift in Sources */,
+				DFBA82A6239BC9490026E311 /* InMemoryService.swift in Sources */,
 				DFBA829E239B8C2D0026E311 /* SpaceXService.swift in Sources */,
 				DFBA8298239B8B970026E311 /* DataStoreProtocol.swift in Sources */,
 				DFBA829C239B8C040026E311 /* WebServiceProtocol.swift in Sources */,
+				DFBA82A2239BC7360026E311 /* LocalDataStore.swift in Sources */,
 				DFBA8294239B88D90026E311 /* Rocket.swift in Sources */,
 				DFBA825F239B81D20026E311 /* SceneDelegate.swift in Sources */,
 			);

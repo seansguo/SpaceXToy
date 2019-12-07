@@ -10,9 +10,21 @@ import Foundation
 
 protocol DataStoreProtocol {
     
-    //MARK: - Business Logic
-    
     func fetchLaunches(completionHandler: @escaping ([Launch], Error?) -> Void)
     
     func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void)
+}
+
+protocol SortableDataStoreProtocol {
+    
+    func fetchLaunchesBySuccess(success: Bool, completionHandler: @escaping ([Launch], Error?) -> Void)
+    
+    func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void)
+}
+
+protocol SettableDataStoreProtocol {
+    
+    func setLaunches(launches: [Launch])
+    
+    func setRocketWikiURL(url: URL)
 }

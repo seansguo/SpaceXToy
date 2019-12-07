@@ -46,10 +46,22 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Root View Controller" id="xx4-KU-gF3">
-                        <barButtonItem key="leftBarButtonItem" title="Success" id="yPB-vC-bT7"/>
+                        <barButtonItem key="leftBarButtonItem" title="Success" id="yPB-vC-bT7">
+                            <connections>
+                                <action selector="filterBySuccessClicked:" destination="hMQ-pD-Ao4" id="NU6-LI-drf"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="Date" id="bPt-LT-x6q"/>
-                            <barButtonItem title="Name" id="aYf-A9-DqZ"/>
+                            <barButtonItem title="Date" id="bPt-LT-x6q">
+                                <connections>
+                                    <action selector="sortByDateClicked:" destination="hMQ-pD-Ao4" id="rrj-gC-ZQd"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Name" id="aYf-A9-DqZ">
+                                <connections>
+                                    <action selector="sortByNameClicked:" destination="hMQ-pD-Ao4" id="O2U-4Z-O02"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                 </tableViewController>

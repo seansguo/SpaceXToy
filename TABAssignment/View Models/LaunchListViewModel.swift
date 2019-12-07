@@ -31,8 +31,10 @@ struct LaunchListViewModel {
     var launches: [LaunchViewModel] = [LaunchViewModel]()
 }
 
+// MARK: - Initialization
 extension LaunchListViewModel {
     init(launches: [LaunchViewModel]) {
         self.launches = launches
     }
 }
+

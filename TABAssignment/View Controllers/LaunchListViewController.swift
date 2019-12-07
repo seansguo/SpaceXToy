@@ -10,7 +10,12 @@ import UIKit
 
 class LaunchListViewController: UITableViewController {
     
-    private let dataStore = RemoteDataStore()
+    private let remoteDataStore = RemoteDataStore()
+    private var localDataStore = LocalDataStore()
+    
+    private var successFilter = true
+    private var nameSortOrder = SortOrder.Ascending
+    private var dateSortOrder = SortOrder.Ascending
     
     private var viewModel: LaunchListViewModel = LaunchListViewModel() {
         didSet {
@@ -27,23 +32,35 @@ class LaunchListViewController: UITableViewController {
         self.setupUI()
         self.fetchLaunches()
         
-//
-//        self.dataStore.fetchRocketWikiURL(id: "falcon1") { (rocketWikiURL, error) in
-//            print(rocketWikiURL)
-//        }
     }
     
     func setupUI() {
         self.title = self.viewModel.title
     }
     
+    func setupViewModel(launches: [Launch]) {
+        let launches = launches.map { launch in
+            return LaunchViewModel(launch :launch)
+        }
+        self.viewModel = LaunchListViewModel(launches: launches)
+    }
+    
     func fetchLaunches() {
-        self.dataStore.fetchLaunches { (launches, error) in
-            
-            let launches = launches.map { launch in
-                return LaunchViewModel(launch :launch)
-            }
-            self.viewModel = LaunchListViewModel(launches: launches)
+        self.remoteDataStore.fetchLaunches { (launches, error) in
+            self.localDataStore.setLaunches(launches: launches)
+            self.setupViewModel(launches: launches)
+        }
+    }
+    
+    func filterBySuccess(success: Bool) {
+        self.localDataStore.fetchLaunchesBySuccess(success: success) { (launches, error) in
+            self.setupViewModel(launches: launches)
+        }
+    }
+    
+    func sort(sortType: SortType, sortOrder: SortOrder) {
+        self.localDataStore.fetchLaunchesSorted(sortType: sortType, sortOrder: sortOrder) { (launches, error) in
+            self.setupViewModel(launches: launches)
         }
     }
     
@@ -63,6 +80,29 @@ class LaunchListViewController: UITableViewController {
         cell.textLabel?.text = launchViewModel.missionName
         cell.detailTextLabel?.text = launchViewModel.date + " (" + launchViewModel.success + ")"
         return cell
+    }
+    
+    @IBAction func filterBySuccessClicked(_ sender: UIBarButtonItem) {
+        self.filterBySuccess(success: self.successFilter)
+        self.successFilter = !self.successFilter
+    }
+    
+    @IBAction func sortByNameClicked(_ sender: UIBarButtonItem) {
+        self.sort(sortType: .Name, sortOrder: self.nameSortOrder)
+        if self.nameSortOrder == .Ascending {
+            self.nameSortOrder = .Descending
+        } else {
+            self.nameSortOrder = .Ascending
+        }
+    }
+    
+    @IBAction func sortByDateClicked(_ sender: UIBarButtonItem) {
+        self.sort(sortType: .Date, sortOrder: self.dateSortOrder)
+        if self.dateSortOrder == .Ascending {
+            self.dateSortOrder = .Descending
+        } else {
+            self.dateSortOrder = .Ascending
+        }
     }
 
 }

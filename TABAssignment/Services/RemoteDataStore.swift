@@ -10,7 +10,7 @@ import Foundation
 
 class RemoteDataStore: DataStoreProtocol {
     
-    var webService: WebServiceProtocol
+    private var webService: WebServiceProtocol
     
     init() {
         self.webService = SpaceXService()
