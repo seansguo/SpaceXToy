@@ -13,4 +13,6 @@ protocol DataStoreProtocol {
     //MARK: - Business Logic
     
     func fetchLaunches(completionHandler: @escaping ([Launch], Error?) -> Void)
+    
+    func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void)
 }

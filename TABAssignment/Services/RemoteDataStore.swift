@@ -21,4 +21,10 @@ class RemoteDataStore: DataStoreProtocol {
             completionHandler(launches, error)
         }
     }
+    
+    func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void) {
+        self.webService.fetchRocketWikiURL(id: id) { (rocketWikiURL, error) in
+            completionHandler(rocketWikiURL, error)
+        }
+    }
 }

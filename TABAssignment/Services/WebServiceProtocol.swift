@@ -13,4 +13,6 @@ protocol WebServiceProtocol {
     //MARK: - List of Launches
     
     func fetchLaunches(completionHandler: @escaping ([Launch], Error?) -> Void)
+    
+    func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void)
 }

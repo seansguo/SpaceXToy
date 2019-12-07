@@ -16,9 +16,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        self.dataStore.fetchLaunches { (launches, error) in
-            print("done")
-        }
+//        self.dataStore.fetchLaunches { (launches, error) in
+//            print("done")
+//        }
+//
+//        self.dataStore.fetchRocketWikiURL(id: "falcon1") { (rocketWikiURL, error) in
+//            print(rocketWikiURL)
+//        }
     }
 
 

@@ -17,7 +17,7 @@ extension URL {
         return URL(string: base + "/launches")!
     }
     
-    static var rockets: URL {
-        return URL(string: base + "/rockets")!
+    static func rocket(id: String) -> URL {
+        return URL(string: base + "/rockets/" + id)!
     }
 }

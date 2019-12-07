@@ -10,11 +10,13 @@ import Foundation
 
 typealias JSONDictionary = [String:Any]
 
+enum WebRequestError: Error {
+    case RocketWikiURLNotFound
+}
+
 class SpaceXService: WebServiceProtocol {
     
     func fetchLaunches(completionHandler: @escaping ([Launch], Error?) -> Void) {
-        
-        print("called spaceX service")
         
         URLSession.shared.dataTask(with: URL.launches) { data, response, error in
 
@@ -58,6 +60,27 @@ class SpaceXService: WebServiceProtocol {
             
         }.resume()
         
+    }
+    
+    func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void) {
+        
+        URLSession.shared.dataTask(with: URL.rocket(id: id)) { data, response, error in
+
+            if let data = data {
+
+                let rocketDict = try! JSONSerialization.jsonObject(with: data, options: []) as! JSONDictionary
+                
+                if let rocketWikiURLString = rocketDict["wikipedia"] as? String {
+                    completionHandler(URL(string: rocketWikiURLString), nil)
+                } else {
+                    completionHandler(nil, WebRequestError.RocketWikiURLNotFound)
+                }
+    
+            } else {
+                completionHandler(nil, error)
+            }
+            
+        }.resume()
     }
     
 }
