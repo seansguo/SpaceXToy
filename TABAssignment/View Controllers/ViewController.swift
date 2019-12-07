@@ -9,10 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let dataStore = RemoteDataStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        self.dataStore.fetchLaunches { (launches, error) in
+            print("done")
+        }
     }
 
 
