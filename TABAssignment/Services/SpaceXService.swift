@@ -47,7 +47,7 @@ class SpaceXService: WebServiceProtocol {
                         let rocketType = rocketDict["rocket_type"] as? String else {
                             return nil
                     }
-                    let rocket = Rocket(id: rocketId, name: rocketName, type: rocketType, description: "", wikiURL: "")
+                    let rocket = Rocket(id: rocketId, name: rocketName, type: rocketType)
                     
                     return Launch(missionName: missionName, launchDate: launchDate, launchSuccess: launchSuccess, rocket: rocket)
                 }
