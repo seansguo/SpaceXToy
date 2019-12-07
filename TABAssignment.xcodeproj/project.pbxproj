@@ -22,6 +22,7 @@
 		DFBA829A239B8BC50026E311 /* RemoteDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA8299239B8BC50026E311 /* RemoteDataStore.swift */; };
 		DFBA829C239B8C040026E311 /* WebServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA829B239B8C040026E311 /* WebServiceProtocol.swift */; };
 		DFBA829E239B8C2D0026E311 /* SpaceXService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA829D239B8C2D0026E311 /* SpaceXService.swift */; };
+		DFBA82A0239BB27B0026E311 /* LaunchListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFBA829F239BB27A0026E311 /* LaunchListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		DFBA8299239B8BC50026E311 /* RemoteDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataStore.swift; sourceTree = "<group>"; };
 		DFBA829B239B8C040026E311 /* WebServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceProtocol.swift; sourceTree = "<group>"; };
 		DFBA829D239B8C2D0026E311 /* SpaceXService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceXService.swift; sourceTree = "<group>"; };
+		DFBA829F239BB27A0026E311 /* LaunchListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 		DFBA828D239B828E0026E311 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
+				DFBA829F239BB27A0026E311 /* LaunchListViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -321,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFBA8261239B81D20026E311 /* LaunchListViewController.swift in Sources */,
+				DFBA82A0239BB27B0026E311 /* LaunchListViewModel.swift in Sources */,
 				DFBA8296239B8ADE0026E311 /* URL+Extensions.swift in Sources */,
 				DFBA825D239B81D20026E311 /* AppDelegate.swift in Sources */,
 				DFBA829A239B8BC50026E311 /* RemoteDataStore.swift in Sources */,

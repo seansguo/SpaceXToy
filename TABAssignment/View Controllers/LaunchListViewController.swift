@@ -10,21 +10,42 @@ import UIKit
 
 class LaunchListViewController: UITableViewController {
     
-    let dataStore = RemoteDataStore()
+    private let dataStore = RemoteDataStore()
+    
+    private var viewModel: LaunchListViewModel = LaunchListViewModel() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-//        self.dataStore.fetchLaunches { (launches, error) in
-//            print("done")
-//        }
+        self.setupUI()
+        self.fetchLaunches()
+        
 //
 //        self.dataStore.fetchRocketWikiURL(id: "falcon1") { (rocketWikiURL, error) in
 //            print(rocketWikiURL)
 //        }
     }
-
+    
+    func setupUI() {
+        self.title = self.viewModel.title
+    }
+    
+    func fetchLaunches() {
+        self.dataStore.fetchLaunches { (launches, error) in
+            
+            let launches = launches.map { launch in
+                return LaunchViewModel(launch :launch)
+            }
+            self.viewModel = LaunchListViewModel(launches: launches)
+        }
+    }
 
 }
 
