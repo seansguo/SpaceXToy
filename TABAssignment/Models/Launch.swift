@@ -12,7 +12,7 @@ import Foundation
 struct Launch {
     var missionName: String
     var launchDate: Date
-    var isSuccess: Bool
+    var launchSuccess: Bool
     
     var rocket: Rocket
 }
