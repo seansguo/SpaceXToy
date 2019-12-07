@@ -22,12 +22,12 @@ extension LaunchViewModel {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         self.date = "Launch Date: " + dateFormatter.string(from: launch.launchDate)
         
-        self.success = "Launch Status: " + (launch.launchSuccess ? "Success" : "Fail")
+        self.success = launch.launchSuccess ? "Success" : "Fail"
     }
 }
 
 struct LaunchListViewModel {
-    var title: String? = "SpaceX Launches"
+    var title: String? = "Launches"
     var launches: [LaunchViewModel] = [LaunchViewModel]()
 }
 

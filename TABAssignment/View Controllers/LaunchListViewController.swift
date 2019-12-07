@@ -46,6 +46,24 @@ class LaunchListViewController: UITableViewController {
             self.viewModel = LaunchListViewModel(launches: launches)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.viewModel.launches.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "launchCell", for: indexPath)
+        let launchViewModel = self.viewModel.launches[indexPath.row]
+        
+        cell.textLabel?.text = launchViewModel.missionName
+        cell.detailTextLabel?.text = launchViewModel.date + " (" + launchViewModel.success + ")"
+        return cell
+    }
 
 }
 
