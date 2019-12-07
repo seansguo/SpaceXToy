@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				DFBA8290239B82A60026E311 /* Services */,
-				DFBA828F239B829A0026E311 /* Utils */,
+				DFBA828F239B829A0026E311 /* Helpers */,
 				DFBA828C239B82870026E311 /* Models */,
 				DFBA828D239B828E0026E311 /* View Models */,
 				DFBA828E239B82940026E311 /* View Controllers */,
@@ -170,12 +170,12 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		DFBA828F239B829A0026E311 /* Utils */ = {
+		DFBA828F239B829A0026E311 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				DFBA8295239B8ADE0026E311 /* URL+Extensions.swift */,
 			);
-			path = Utils;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		DFBA8290239B82A60026E311 /* Services */ = {
