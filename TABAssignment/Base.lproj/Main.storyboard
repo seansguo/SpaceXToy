@@ -104,7 +104,13 @@
                             <outlet property="delegate" destination="L71-vk-slQ" id="h3d-6Z-jfu"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ZiK-gx-ZN1"/>
+                    <navigationItem key="navigationItem" id="ZiK-gx-ZN1">
+                        <barButtonItem key="rightBarButtonItem" title="Wiki" id="Pfv-op-I8X">
+                            <connections>
+                                <action selector="openWikiClicked:" destination="L71-vk-slQ" id="Xra-iP-9c9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTP-j2-YQ4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

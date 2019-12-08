@@ -15,7 +15,6 @@ enum GroupBy {
 
 class InMemoryService: LocalServiceProtocol {
     private var launches: [Launch] = []
-    private var rocketWikiURL: URL?
     
     func fetchLaunches(completionHandler: @escaping ([Launch], Error?) -> Void) {
         completionHandler(self.launches, nil)
@@ -49,14 +48,29 @@ class InMemoryService: LocalServiceProtocol {
     }
     
     func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void) {
-        completionHandler(self.rocketWikiURL, nil)
+        
+        let launch = self.launches.filter { (launch) -> Bool in
+            return launch.rocket.id == id
+        }.first
+        
+        if let launch = launch {
+            completionHandler(launch.rocket.wikiURL, nil)
+        } else {
+            completionHandler(nil, nil)
+        }
     }
     
     func setLaunches(launches: [Launch]) {
         self.launches = launches
     }
     
-    func setRocketWikiURL(url: URL) {
-        self.rocketWikiURL = url
+    func setRocketWikiURL(flightNumber: Int, url: URL) -> Launch? {
+        for index in 0..<self.launches.count {
+            if self.launches[index].flightNumber == flightNumber {
+                self.launches[index].rocket.wikiURL = url
+                return self.launches[index]
+            }
+        }
+        return nil
     }
 }

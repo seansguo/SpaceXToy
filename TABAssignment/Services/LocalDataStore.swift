@@ -10,9 +10,7 @@ import Foundation
 
 class LocalDataStore: DataStoreProtocol, SettableDataStoreProtocol, SortableDataStoreProtocol {
     
-    // MARK: - Object lifecycle
-
-    static let sharedInstance = LocalDataStore()
+    static let shared = LocalDataStore()
     
     private var localService: LocalServiceProtocol
     
@@ -36,8 +34,8 @@ class LocalDataStore: DataStoreProtocol, SettableDataStoreProtocol, SortableData
         self.localService.setLaunches(launches: launches)
     }
     
-    func setRocketWikiURL(url: URL) {
-        self.localService.setRocketWikiURL(url: url)
+    func setRocketWikiURL(flightNumber: Int, url: URL) -> Launch? {
+        return self.localService.setRocketWikiURL(flightNumber: flightNumber, url: url)
     }
     
     func fetchLaunchesBySuccess(success: Bool, completionHandler: @escaping ([Launch], Error?) -> Void) {

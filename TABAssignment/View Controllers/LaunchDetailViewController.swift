@@ -38,9 +38,18 @@ class LaunchDetailViewController: UITableViewController {
     // MARK: - Data
     
     func fetchLaunchDetail() {
-        LocalDataStore.sharedInstance.fetchOneLaunch(flightNumber: self.flightNumber) { (launch, error) in
+        LocalDataStore.shared.fetchOneLaunch(flightNumber: self.flightNumber) { (launch, error) in
             guard let launch = launch else { return }
-            self.setupViewModel(launch: launch)
+            
+            if launch.rocket.wikiURL != nil {
+                self.setupViewModel(launch: launch)
+            } else {
+                RemoteDataStore.shared.fetchRocketWikiURL(id: launch.rocket.id) { (url, error) in
+                    guard let url = url else { return }
+                    guard let newLaunch = LocalDataStore.shared.setRocketWikiURL(flightNumber: launch.flightNumber, url: url) else { return }
+                    self.setupViewModel(launch: newLaunch)
+                }
+            }
         }
     }
 
@@ -65,5 +74,14 @@ class LaunchDetailViewController: UITableViewController {
         cell.textLabel?.text = self.viewModel.infoInSections[indexPath.section][indexPath.row]
         return cell
     }
+    
+    // MARK: - Actions
+    
+    @IBAction func openWikiClicked(_ sender: UIBarButtonItem) {
+        guard let url = self.viewModel.rocketWikiURL else { return }
+        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+    }
+    
 
 }

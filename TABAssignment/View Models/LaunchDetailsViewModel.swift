@@ -24,7 +24,8 @@ struct LaunchDetailViewModel {
     
     var title: String? = "Details"
     var sectionTitles: [String] = []
-    var infoInSections:[[String]] = []
+    var infoInSections: [[String]] = []
+    var rocketWikiURL: URL?
 }
 
 extension LaunchDetailViewModel {
@@ -57,5 +58,6 @@ extension LaunchDetailViewModel {
         
         self.infoInSections = [launchDetails, rocketDetails]
         
+        self.rocketWikiURL = launch.rocket.wikiURL
     }
 }

@@ -10,8 +10,6 @@ import UIKit
 
 class LaunchListViewController: UITableViewController {
     
-    let remoteDataStore = RemoteDataStore()
-    
     private var successFilter = true
     private var currentGroupBy = GroupBy.Name // sort by name by default
     
@@ -25,11 +23,9 @@ class LaunchListViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         self.setupUI()
         self.fetchLaunches()
-        
     }
     
     func setupUI() {
@@ -46,23 +42,24 @@ class LaunchListViewController: UITableViewController {
     // MARK: - Data and Sorting
     
     func fetchLaunches() {
-        self.remoteDataStore.fetchLaunches { (launches, error) in
+        RemoteDataStore.shared.fetchLaunches { (launches, error) in
             
             // store data in local DB
-            LocalDataStore.sharedInstance.setLaunches(launches: launches)
-        
+            LocalDataStore.shared.setLaunches(launches: launches)
+            
+            // sort by default
             self.sort(groupBy: self.currentGroupBy)
         }
     }
     
     func filterBySuccess(success: Bool) {
-        LocalDataStore.sharedInstance.fetchLaunchesBySuccess(success: success) { (launches, error) in
+        LocalDataStore.shared.fetchLaunchesBySuccess(success: success) { (launches, error) in
             self.setupViewModel(launches: launches, groupBy: self.currentGroupBy)
         }
     }
     
     func sort(groupBy: GroupBy) {
-        LocalDataStore.sharedInstance.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
+        LocalDataStore.shared.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
             self.setupViewModel(launches: launches, groupBy: groupBy)
             self.currentGroupBy = groupBy
         }

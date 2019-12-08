@@ -26,5 +26,5 @@ protocol SettableDataStoreProtocol {
     
     func setLaunches(launches: [Launch])
     
-    func setRocketWikiURL(url: URL)
+    func setRocketWikiURL(flightNumber: Int, url: URL) -> Launch?
 }

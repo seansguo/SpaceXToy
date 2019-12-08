@@ -32,5 +32,5 @@ protocol LocalServiceProtocol {
     
     //MARK: - Set Rocket Wiki URL
     
-    func setRocketWikiURL(url: URL)
+    func setRocketWikiURL(flightNumber: Int, url: URL) -> Launch?
 }

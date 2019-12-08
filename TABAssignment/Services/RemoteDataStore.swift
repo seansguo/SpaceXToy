@@ -10,9 +10,11 @@ import Foundation
 
 class RemoteDataStore: DataStoreProtocol {
     
+    static let shared = RemoteDataStore()
+    
     private var webService: WebServiceProtocol
     
-    init() {
+    private init() {
         self.webService = SpaceXService()
     }
     

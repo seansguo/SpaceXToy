@@ -12,4 +12,5 @@ struct Rocket {
     var id: String
     var name: String
     var type: String
+    var wikiURL: URL?
 }
