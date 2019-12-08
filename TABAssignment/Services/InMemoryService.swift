@@ -8,12 +8,7 @@
 
 import Foundation
 
-enum SortOrder {
-    case Ascending
-    case Descending
-}
-
-enum SortType {
+enum GroupBy {
     case Name
     case Date
 }
@@ -33,21 +28,13 @@ class InMemoryService: LocalServiceProtocol {
         completionHandler(filteredLaunches, nil)
     }
     
-    func fetchLaunchesSorted(sortType:SortType, sortOrder: SortOrder, completionHandler: @escaping ([Launch], Error?) -> Void) {
+    func fetchLaunchesSorted(groupBy: GroupBy, completionHandler: @escaping ([Launch], Error?) -> Void) {
         let sortedLaunches = self.launches.sorted { (a, b) -> Bool in
             
-            if sortType == .Name {
-                if sortOrder == .Ascending {
-                    return a.missionName.lowercased() < b.missionName.lowercased()
-                } else {
-                    return a.missionName.lowercased() > b.missionName.lowercased()
-                }
+            if groupBy == .Name {
+                return a.missionName.lowercased() < b.missionName.lowercased()
             } else {
-                if sortOrder == .Ascending {
-                    return a.launchDate < b.launchDate
-                } else {
-                    return a.launchDate > b.launchDate
-                }
+                return a.launchDate < b.launchDate
             }
             
         }

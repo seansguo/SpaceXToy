@@ -42,8 +42,8 @@ class LocalDataStore: DataStoreProtocol, SettableDataStoreProtocol, SortableData
         }
     }
     
-    func fetchLaunchesSorted(sortType: SortType, sortOrder: SortOrder, completionHandler: @escaping ([Launch], Error?) -> Void) {
-        self.localService.fetchLaunchesSorted(sortType: sortType, sortOrder: sortOrder) { (launches, error) in
+    func fetchLaunchesSorted(groupBy: GroupBy, completionHandler: @escaping ([Launch], Error?) -> Void) {
+        self.localService.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
             completionHandler(launches, error)
         }
     }

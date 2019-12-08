@@ -16,7 +16,7 @@ protocol LocalServiceProtocol {
     
     func fetchLaunchesBySuccess(success: Bool, completionHandler: @escaping ([Launch], Error?) -> Void)
     
-    func fetchLaunchesSorted(sortType: SortType, sortOrder: SortOrder, completionHandler: @escaping ([Launch], Error?) -> Void)
+    func fetchLaunchesSorted(groupBy: GroupBy, completionHandler: @escaping ([Launch], Error?) -> Void)
     
     //MARK: - Rocket Wiki URL
     

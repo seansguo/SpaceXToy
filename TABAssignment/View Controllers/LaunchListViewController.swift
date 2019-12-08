@@ -14,8 +14,7 @@ class LaunchListViewController: UITableViewController {
     private var localDataStore = LocalDataStore()
     
     private var successFilter = true
-    private var nameSortOrder = SortOrder.Ascending
-    private var dateSortOrder = SortOrder.Ascending
+    private var currentGroupBy = GroupBy.Name // sort by name by default
     
     private var viewModel: LaunchListViewModel = LaunchListViewModel() {
         didSet {
@@ -38,49 +37,69 @@ class LaunchListViewController: UITableViewController {
         self.title = self.viewModel.title
     }
     
-    func setupViewModel(launches: [Launch]) {
+    func setupViewModel(launches: [Launch], groupBy: GroupBy) {
         let launches = launches.map { launch in
             return LaunchViewModel(launch :launch)
         }
-        self.viewModel = LaunchListViewModel(launches: launches)
+        self.viewModel = LaunchListViewModel(launches: launches, groupBy: groupBy)
     }
+    
+    // MARK: - Data and Sorting
     
     func fetchLaunches() {
         self.remoteDataStore.fetchLaunches { (launches, error) in
+            
+            // store data in local DB
             self.localDataStore.setLaunches(launches: launches)
-            self.setupViewModel(launches: launches)
+        
+            self.sort(groupBy: self.currentGroupBy)
         }
     }
     
     func filterBySuccess(success: Bool) {
         self.localDataStore.fetchLaunchesBySuccess(success: success) { (launches, error) in
-            self.setupViewModel(launches: launches)
+            self.setupViewModel(launches: launches, groupBy: self.currentGroupBy)
         }
     }
     
-    func sort(sortType: SortType, sortOrder: SortOrder) {
-        self.localDataStore.fetchLaunchesSorted(sortType: sortType, sortOrder: sortOrder) { (launches, error) in
-            self.setupViewModel(launches: launches)
+    func sort(groupBy: GroupBy) {
+        self.localDataStore.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
+            self.setupViewModel(launches: launches, groupBy: groupBy)
+            self.currentGroupBy = groupBy
         }
     }
+    
+    // MARK: - Tableview
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.launches.count
+        return self.viewModel.launchesInSections[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "launchCell", for: indexPath)
-        let launchViewModel = self.viewModel.launches[indexPath.row]
+        let launchViewModel = self.viewModel.launchesInSections[indexPath.section][indexPath.row]
         
         cell.textLabel?.text = launchViewModel.missionName
         cell.detailTextLabel?.text = launchViewModel.date + " (" + launchViewModel.success + ")"
         return cell
     }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return self.viewModel.sectionTitles.count
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.viewModel.sectionTitles[section]
+    }
+    
+    
+    // MARK: - Actions
     
     @IBAction func filterBySuccessClicked(_ sender: UIBarButtonItem) {
         self.filterBySuccess(success: self.successFilter)
@@ -88,21 +107,11 @@ class LaunchListViewController: UITableViewController {
     }
     
     @IBAction func sortByNameClicked(_ sender: UIBarButtonItem) {
-        self.sort(sortType: .Name, sortOrder: self.nameSortOrder)
-        if self.nameSortOrder == .Ascending {
-            self.nameSortOrder = .Descending
-        } else {
-            self.nameSortOrder = .Ascending
-        }
+        self.sort(groupBy: .Name)
     }
     
     @IBAction func sortByDateClicked(_ sender: UIBarButtonItem) {
-        self.sort(sortType: .Date, sortOrder: self.dateSortOrder)
-        if self.dateSortOrder == .Ascending {
-            self.dateSortOrder = .Descending
-        } else {
-            self.dateSortOrder = .Ascending
-        }
+        self.sort(groupBy: .Date)
     }
 
 }
