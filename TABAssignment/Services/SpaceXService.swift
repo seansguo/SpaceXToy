@@ -28,6 +28,7 @@ class SpaceXService: WebServiceProtocol {
                     let json = dict as JSONDictionary
                     
                     guard
+                        let flightNumber = json["flight_number"] as? Int,
                         let missionName = json["mission_name"] as? String,
                         let launchSuccess = json["launch_success"] as? Bool,
                         let launchDateString = json["launch_date_utc"] as? String,
@@ -49,7 +50,7 @@ class SpaceXService: WebServiceProtocol {
                     }
                     let rocket = Rocket(id: rocketId, name: rocketName, type: rocketType)
                     
-                    return Launch(missionName: missionName, launchDate: launchDate, launchSuccess: launchSuccess, rocket: rocket)
+                    return Launch(flightNumber: flightNumber, missionName: missionName, launchDate: launchDate, launchSuccess: launchSuccess, rocket: rocket)
                 }
                 
                 completionHandler(launches, nil)

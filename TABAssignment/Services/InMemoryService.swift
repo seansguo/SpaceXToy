@@ -41,6 +41,13 @@ class InMemoryService: LocalServiceProtocol {
         completionHandler(sortedLaunches, nil)
     }
     
+    func fetchOneLaunch(flightNumber: Int, completionHandler: @escaping (Launch?, Error?) -> Void) {
+        let launch = self.launches.filter { (launch) -> Bool in
+            return launch.flightNumber == flightNumber
+        }.first
+        completionHandler(launch, nil)
+    }
+    
     func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void) {
         completionHandler(self.rocketWikiURL, nil)
     }

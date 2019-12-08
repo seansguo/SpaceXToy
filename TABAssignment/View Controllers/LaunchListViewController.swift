@@ -10,8 +10,7 @@ import UIKit
 
 class LaunchListViewController: UITableViewController {
     
-    private let remoteDataStore = RemoteDataStore()
-    private var localDataStore = LocalDataStore()
+    let remoteDataStore = RemoteDataStore()
     
     private var successFilter = true
     private var currentGroupBy = GroupBy.Name // sort by name by default
@@ -50,20 +49,20 @@ class LaunchListViewController: UITableViewController {
         self.remoteDataStore.fetchLaunches { (launches, error) in
             
             // store data in local DB
-            self.localDataStore.setLaunches(launches: launches)
+            LocalDataStore.sharedInstance.setLaunches(launches: launches)
         
             self.sort(groupBy: self.currentGroupBy)
         }
     }
     
     func filterBySuccess(success: Bool) {
-        self.localDataStore.fetchLaunchesBySuccess(success: success) { (launches, error) in
+        LocalDataStore.sharedInstance.fetchLaunchesBySuccess(success: success) { (launches, error) in
             self.setupViewModel(launches: launches, groupBy: self.currentGroupBy)
         }
     }
     
     func sort(groupBy: GroupBy) {
-        self.localDataStore.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
+        LocalDataStore.sharedInstance.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
             self.setupViewModel(launches: launches, groupBy: groupBy)
             self.currentGroupBy = groupBy
         }
@@ -72,7 +71,8 @@ class LaunchListViewController: UITableViewController {
     // MARK: - Tableview
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let flightNumber = self.viewModel.launchesInSections[indexPath.section][indexPath.row].flightNUmber
+        self.performSegue(withIdentifier: "showLaunchDetailSegue", sender: flightNumber)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,7 +93,6 @@ class LaunchListViewController: UITableViewController {
         return self.viewModel.sectionTitles.count
     }
     
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.viewModel.sectionTitles[section]
     }
@@ -112,6 +111,15 @@ class LaunchListViewController: UITableViewController {
     
     @IBAction func sortByDateClicked(_ sender: UIBarButtonItem) {
         self.sort(groupBy: .Date)
+    }
+    
+    // MARK: - Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showLaunchDetailSegue") {
+            let vc = segue.destination as! LaunchDetailViewController
+            vc.flightNumber = sender as! Int
+        }
     }
 
 }

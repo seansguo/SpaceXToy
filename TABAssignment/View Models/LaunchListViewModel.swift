@@ -9,6 +9,7 @@
 import Foundation
 
 struct LaunchViewModel {
+    var flightNUmber: Int
     var missionName: String
     var date: String
     var success: String
@@ -16,6 +17,7 @@ struct LaunchViewModel {
 
 extension LaunchViewModel {
     init(launch: Launch) {
+        self.flightNUmber = launch.flightNumber
         self.missionName = launch.missionName
         
         let dateFormatter = DateFormatter()

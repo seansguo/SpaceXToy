@@ -8,8 +8,8 @@
 
 import Foundation
 
-
 struct Launch {
+    var flightNumber: Int
     var missionName: String
     var launchDate: Date
     var launchSuccess: Bool

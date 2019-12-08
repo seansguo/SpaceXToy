@@ -18,6 +18,10 @@ protocol LocalServiceProtocol {
     
     func fetchLaunchesSorted(groupBy: GroupBy, completionHandler: @escaping ([Launch], Error?) -> Void)
     
+    //MARK: - One Launch
+    
+    func fetchOneLaunch(flightNumber: Int, completionHandler: @escaping (Launch?, Error?) -> Void)
+    
     //MARK: - Rocket Wiki URL
     
     func fetchRocketWikiURL(id: String, completionHandler: @escaping (URL?, Error?) -> Void)

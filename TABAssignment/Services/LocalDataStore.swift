@@ -10,9 +10,13 @@ import Foundation
 
 class LocalDataStore: DataStoreProtocol, SettableDataStoreProtocol, SortableDataStoreProtocol {
     
+    // MARK: - Object lifecycle
+
+    static let sharedInstance = LocalDataStore()
+    
     private var localService: LocalServiceProtocol
     
-    init() {
+    private init() {
         self.localService = InMemoryService()
     }
     
@@ -45,6 +49,12 @@ class LocalDataStore: DataStoreProtocol, SettableDataStoreProtocol, SortableData
     func fetchLaunchesSorted(groupBy: GroupBy, completionHandler: @escaping ([Launch], Error?) -> Void) {
         self.localService.fetchLaunchesSorted(groupBy: groupBy) { (launches, error) in
             completionHandler(launches, error)
+        }
+    }
+    
+    func fetchOneLaunch(flightNumber: Int, completionHandler: @escaping (Launch?, Error?) -> Void) {
+        self.localService.fetchOneLaunch(flightNumber: flightNumber) { (launch, error) in
+            completionHandler(launch, error)
         }
     }
 }
